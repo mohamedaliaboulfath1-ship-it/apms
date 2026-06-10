@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# APMS — Advance & Petty Cash Management System
 
-## Getting Started
+Enterprise-grade custody control and reconciliation platform for managing employee advances, petty cash, invoices, and month-end reconciliation.
 
-First, run the development server:
+## Quick Start
 
 ```bash
+cd apms
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Next.js 16, TypeScript, Tailwind CSS v4 |
+| UI | shadcn/ui, Framer Motion, Recharts, Lucide |
+| Backend | Supabase (PostgreSQL, Auth, Storage, RLS) |
+| Deployment | Vercel + Supabase |
 
-## Learn More
+## Modules
 
-To learn more about Next.js, take a look at the following resources:
+- **Executive Dashboard** — KPIs, interactive charts, real-time overview
+- **Employee Management** — Balances, risk scores, settlement tracking
+- **Custody Management** — Transfers, distributions, direct purchases
+- **Invoice Management** — Upload, review, approve, settle (OCR-ready)
+- **Missing Invoice Workflow** — Track undocumented expenses
+- **Card Expense Management** — Corporate card tracking
+- **Subscription Management** — Renewal alerts, cost trends
+- **Wealth Monitor** — Cash position and forecasting
+- **Reconciliation Center** — Month-end closing with status indicators
+- **Reports Center** — Excel, PDF, CSV, Audit Package exports
+- **Notification Engine** — In-app, email-ready, WhatsApp-ready
+- **AI Financial Assistant** — Natural language queries
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+apms/
+├── docs/                    # Architecture, API, ERD, Roadmap
+├── supabase/
+│   └── migrations/          # PostgreSQL schema + RLS
+├── src/
+│   ├── app/
+│   │   ├── (dashboard)/     # All module pages
+│   │   └── api/             # API routes
+│   ├── components/
+│   │   ├── charts/          # Recharts wrappers
+│   │   ├── dashboard/       # Dashboard widgets
+│   │   ├── layout/          # Sidebar, header
+│   │   ├── shared/          # DataTable, module views
+│   │   └── ui/              # shadcn/ui components
+│   └── lib/
+│       ├── data/            # Demo data (dev mode)
+│       ├── supabase/        # Supabase clients
+│       └── types/           # TypeScript types
+```
 
-## Deploy on Vercel
+## Supabase Setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Run the migration: `supabase/migrations/001_initial_schema.sql`
+3. Copy URL and anon key to `.env.local`
+4. Enable Row Level Security (already configured in migration)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## GitHub Setup
+
+```bash
+gh auth login
+gh repo create apms --public --source=. --remote=origin
+git push -u origin main
+```
+
+## Vercel Deployment
+
+```bash
+npx vercel
+```
+
+Set environment variables from `.env.example` in Vercel dashboard.
+
+## Documentation
+
+- [Architecture](./docs/ARCHITECTURE.md)
+- [Database Schema & ERD](./docs/DATABASE.md)
+- [API Design](./docs/API.md)
+- [Development Roadmap](./docs/ROADMAP.md)
+
+## License
+
+Proprietary — Kayan Environmental Services / Monitoring Systems Technical Consultancy
